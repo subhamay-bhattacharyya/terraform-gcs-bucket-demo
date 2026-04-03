@@ -25,94 +25,99 @@ jobs:
   # ============================================================================
   # CI Job
   # ============================================================================
-
-  ci:
-    name: CI
-    uses: subhamay-bhattacharyya-gha/tf-ci-reusable-wf/.github/workflows/ci.yaml@main
-    with:
-      cloud-provider: gcp
-      tflint-ver: ${{ vars.TF_LINT_VER }}
-      backend-type: remote
-      tf-vars-file: environments/devl/auto.terraform.tfvars.json
-    secrets:
-      tfc-token: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
-      gcp-wif-provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
-      gcp-service-account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-
-  # ============================================================================
-  # Terraform Test Job
-  # ============================================================================
-
-  tftest:
-    name: Terraform Test
-    needs: ci
+  placeholder-ci:
+    name: CI Placeholder
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: tf
     steps:
-      - name: TF Test
-        run: |
-          echo "Placeholder for TF Test reusable action"
-      # - name: Checkout
-      #   uses: actions/checkout@v6
+      - name: CI Placeholder Step
+        run: echo "This is a placeholder for the CI job. The actual CI workflow is defined in a reusable workflow at .github/workflows/ci.yaml."
+  # ci:
+  #   name: CI
+  #   uses: subhamay-bhattacharyya-gha/tf-ci-reusable-wf/.github/workflows/ci.yaml@main
+  #   with:
+  #     cloud-provider: gcp
+  #     tflint-ver: ${{ vars.TF_LINT_VER }}
+  #     backend-type: remote
+  #     tf-vars-file: environments/devl/auto.terraform.tfvars.json
+  #   secrets:
+  #     tfc-token: ${{ secrets.TF_TOKEN_APP_TERRAFORM_IO }}
+  #     gcp-wif-provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+  #     gcp-service-account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
 
-      # - name: Setup Terraform
-      #   uses: hashicorp/setup-terraform@v3
-      #   with:
-      #     terraform_version: ">=1.6.0"
+  # # ============================================================================
+  # # Terraform Test Job
+  # # ============================================================================
 
-      # - name: Terraform Init
-      #   run: terraform init -backend=false
+  # tftest:
+  #   name: Terraform Test
+  #   needs: ci
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: tf
+  #   steps:
+  #     - name: TF Test
+  #       run: |
+  #         echo "Placeholder for TF Test reusable action"
+  #     # - name: Checkout
+  #     #   uses: actions/checkout@v6
 
-      # - name: Terraform Test
-      #   run: terraform test
+  #     # - name: Setup Terraform
+  #     #   uses: hashicorp/setup-terraform@v3
+  #     #   with:
+  #     #     terraform_version: ">=1.6.0"
 
-  # ============================================================================
-  # Generate Change Log
-  # ============================================================================
+  #     # - name: Terraform Init
+  #     #   run: terraform init -backend=false
 
-  generate-changelog:
-    name: Generate Changelog
-    runs-on: ubuntu-latest
-    needs: tftest
-    if: github.ref != 'refs/heads/main'
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
+  #     # - name: Terraform Test
+  #     #   run: terraform test
 
-      - name: Generate changelog
-        uses: orhun/git-cliff-action@v4
-        id: git-cliff
-        with:
-          config: cliff.toml
-          args: --verbose
-        env:
-          OUTPUT: CHANGELOG.md
+  # # ============================================================================
+  # # Generate Change Log
+  # # ============================================================================
 
-      - name: Commit changelog
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add CHANGELOG.md
-          git diff --staged --quiet || git commit -m "docs: update CHANGELOG.md [skip ci]"
-          git push
+  # generate-changelog:
+  #   name: Generate Changelog
+  #   runs-on: ubuntu-latest
+  #   needs: tftest
+  #   if: github.ref != 'refs/heads/main'
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v6
+  #       with:
+  #         fetch-depth: 0
 
-  # ============================================================================
-  # Release Creation
-  # ============================================================================
+  #     - name: Generate changelog
+  #       uses: orhun/git-cliff-action@v4
+  #       id: git-cliff
+  #       with:
+  #         config: cliff.toml
+  #         args: --verbose
+  #       env:
+  #         OUTPUT: CHANGELOG.md
 
-  create-release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    needs: tftest
-    if: github.ref == 'refs/heads/main'
-    permissions:
-      contents: write
-    steps:
-      - name: Create Release
-        uses: subhamay-bhattacharyya-gha/create-release-action@main
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Commit changelog
+  #       run: |
+  #         git config user.name "github-actions[bot]"
+  #         git config user.email "github-actions[bot]@users.noreply.github.com"
+  #         git add CHANGELOG.md
+  #         git diff --staged --quiet || git commit -m "docs: update CHANGELOG.md [skip ci]"
+  #         git push
+
+  # # ============================================================================
+  # # Release Creation
+  # # ============================================================================
+
+  # create-release:
+  #   name: Create Release
+  #   runs-on: ubuntu-latest
+  #   needs: tftest
+  #   if: github.ref == 'refs/heads/main'
+  #   permissions:
+  #     contents: write
+  #   steps:
+  #     - name: Create Release
+  #       uses: subhamay-bhattacharyya-gha/create-release-action@main
+  #       with:
+  #         github-token: ${{ secrets.GITHUB_TOKEN }}

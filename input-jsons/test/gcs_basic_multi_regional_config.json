@@ -1,0 +1,13 @@
+{
+  "base_name": "gcpdemo-test-bucket",
+  "location": "US",
+  "storage_class": "STANDARD",
+  "force_destroy": false,
+  "labels": {
+    "managed_by": "terraform",
+    "environment": "test"
+  },
+  "versioning": {
+    "enabled": false
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "base_name": "basic-multi-regional-bucket",
+  "location": "US",
+  "storage_class": "STANDARD",
+  "force_destroy": true,
+  "labels": {
+    "managed_by": "terraform",
+    "environment": "devl"
+  }
+}
+

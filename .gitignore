@@ -85,3 +85,4 @@ dist/
 awscliv2.zip
 LICENSE.txt
 aws/*
+sa-key.json

@@ -1,0 +1,10 @@
+{
+  "base_name": "basic-dual-region-bucket",
+  "location": "NAM4",
+  "storage_class": "MULTI_REGIONAL",
+  "force_destroy": true,
+  "labels": {
+    "managed_by": "terraform",
+    "environment": "test"
+  }
+}

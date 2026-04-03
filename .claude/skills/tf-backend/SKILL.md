@@ -10,7 +10,7 @@ description: >
   "backend.tf" by name.
 argument-hint: |
   $0 = organization: Terraform Cloud organization name
-    (default: subhamay-bhattacharyya-projects)
+    (default: subhamay-bhattacharyya-projects) - ALWAYS the organization of the current repository, inferred automatically from the project context
   $1 = workspace_name: Terraform Cloud workspace name — ALWAYS the current
     repository name, inferred automatically from the project context
 ---

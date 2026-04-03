@@ -1,0 +1,10 @@
+{
+  "base_name": "basic-zonal-bucket",
+  "location": "US-EAST1",
+  "storage_class": "STANDARD",
+  "force_destroy": true,
+  "labels": {
+    "managed_by": "terraform",
+    "environment": "devl"
+  }
+}

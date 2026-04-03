@@ -6,7 +6,7 @@ terraform {
     organization = "subhamay-bhattacharyya-projects"
 
     workspaces {
-      name = "terraform-google-service-demo"
+      name = "terraform-gcs-bucket-demo"
     }
   }
 }

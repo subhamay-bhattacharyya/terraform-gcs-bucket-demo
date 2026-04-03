@@ -1,5 +1,5 @@
 {
-  "name": "terraform-google-service-demo",
+  "name": "terraform-gcs-bucket-demo",
   "version": "1.0.0",
   "description": "Terraform module for provisioning a Google Cloud Storage resource on GCP.",
   "scripts": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/subhamay-bhattacharyya-gha/terraform-google-service-demo"
+    "url": "https://github.com/subhamay-bhattacharyya-gha/terraform-gcs-bucket-demo"
   },
   "keywords": [
     "terraform",

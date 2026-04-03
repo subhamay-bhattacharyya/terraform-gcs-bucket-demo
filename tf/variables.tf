@@ -16,21 +16,28 @@ variable "environment" {
 }
 
 variable "project_code" {
-  description = "Project code prefix for resource naming (e.g., gcsdemo)"
+  description = "Project code prefix for resource naming (e.g., gcpdemo)"
   type        = string
-  default     = "gcsdemo"
+  default     = "gcpdemo"
 }
 
 # Configuration File Paths
 # ============================================================================
 
 variable "gcs_config_path" {
-  description = "Map of config keys to GCS config JSON file paths"
+  description = "Map of config keys to GCS bucket config JSON file paths"
   type        = map(string)
   default = {
-    basic = "gcs_config.json"
+    basic       = "gcs_basic_multi_regional_config.json"
+    regional    = "gcs_basic_regional_config.json"
+    dual_region = "gcs_basic_dual_region_config.json"
+    zonal       = "gcs_basic_zonal_config.json"
+    lifecycle   = "gcs_life_cycle_config.json"
   }
 }
+
+# Infrastructure Variables
+# ============================================================================
 
 variable "credentials_file" {
   description = "Path to the GCP service account credentials JSON file"
@@ -40,6 +47,11 @@ variable "credentials_file" {
 variable "project_id" {
   description = "The GCP project ID in which resources will be created."
   type        = string
+
+  validation {
+    condition     = length(var.project_id) > 0
+    error_message = "project_id must not be empty."
+  }
 }
 
 variable "region" {

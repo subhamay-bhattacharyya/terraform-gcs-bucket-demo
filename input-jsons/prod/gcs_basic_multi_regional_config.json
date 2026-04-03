@@ -1,0 +1,13 @@
+{
+  "base_name": "gcpdemo-prod-bucket",
+  "location": "US",
+  "storage_class": "STANDARD",
+  "force_destroy": false,
+  "labels": {
+    "managed_by": "terraform",
+    "environment": "prod"
+  },
+  "versioning": {
+    "enabled": true
+  }
+}
